@@ -1,0 +1,7 @@
+# TODO: how can I "share" the `aur_builder` username
+# TODO: how can I avoiding repeating tasks if I know they're done?
+- include_tasks: ./create-aur-builder.yml
+  when: ansible_facts.os_family == 'Archlinux'
+
+- include_tasks: ./install-yay-bin.yaml
+  when: ansible_facts.os_family == 'Archlinux'

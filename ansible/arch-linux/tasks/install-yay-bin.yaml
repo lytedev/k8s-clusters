@@ -1,0 +1,4 @@
+- name: install yay-bin
+  include: aur.yaml pkg_name=yay-bin
+  vars:
+    makepkg_nonroot_user: aur_builder
