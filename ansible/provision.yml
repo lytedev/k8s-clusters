@@ -1,9 +1,8 @@
----
 - name: provision Arch Linux hosts
   hosts: all
+  gather_facts: yes
   roles:
     - role: './arch-linux'
-  gather_facts: yes
   tasks:
     - name: print all available facts
       ansible.builtin.debug:

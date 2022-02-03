@@ -1,0 +1,8 @@
+- name: upgrade all packages
+  community.general.pacman:
+    # executable: yay
+    force: yes
+    state: latest
+    update_cache: yes
+    upgrade: yes
+

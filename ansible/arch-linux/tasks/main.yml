@@ -4,7 +4,10 @@
 - include_tasks: ./create-aur-builder.yml
   when: ansible_facts.os_family == 'Archlinux'
 
-- include_tasks: ./install-yay-bin.yaml
+- include_tasks: ./install-yay-bin.yml
+  when: ansible_facts.os_family == 'Archlinux'
+
+- include_tasks: ./upgrade-all-packages.yml
   when: ansible_facts.os_family == 'Archlinux'
 
 # TODO:

@@ -1,0 +1,39 @@
+- name: deprovision k3s nodes
+  hosts: all
+  become: true
+  gather_facts: yes
+  any_errors_fatal: true
+  tasks:
+    - name: Kill k3s
+      ansible.builtin.command: /usr/local/bin/k3s-killall.sh
+    - name: Uninstall k3s
+      ansible.builtin.command:
+        cmd: /usr/local/bin/k3s-uninstall.sh
+        removes: /usr/local/bin/k3s-uninstall.sh
+    - name: Uninstall k3s agent
+      ansible.builtin.command:
+        cmd: /usr/local/bin/k3s-agent-uninstall.sh
+        removes: /usr/local/bin/k3s-agent-uninstall.sh
+    - name: Gather list of CNI files to delete
+      find:
+        paths: /etc/cni/net.d
+        patterns: "*"
+      register: files_to_delete
+    - name: Delete CNI files
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ files_to_delete.files }}"
+
+# - hosts: k3s_nodes
+#   vars:
+#     k3s_registration_address: loadbalancer  # Typically a load balancer.
+#     k3s_server:
+#       datastore-endpoint: "postgres://postgres:verybadpass@database:5432/postgres?sslmode=disable"
+#   pre_tasks:
+#     - name: Set each node to be a control node
+#       ansible.builtin.set_fact:
+#         k3s_control_node: true
+#       when: inventory_hostname in ['node2', 'node3']
+#   roles:
+#     - role: xanmanning.k3s
