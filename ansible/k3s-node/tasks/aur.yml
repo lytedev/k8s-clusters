@@ -2,7 +2,7 @@
   connection: local
   become: no
   uri: >
-    url=https://aur.archlinux.org/rpc.php?type=info&arg={{ pkg_name | mandatory }}
+    url=https://aur.archlinux.org/rpc?v=5&type=info&arg={{ pkg_name | mandatory }}
     return_content=yes
     timeout=6
   register: api_info
@@ -11,7 +11,7 @@
     that:
       - api_info.status == 200
       - api_info.json is defined
-      - api_info.json.type == 'info'
+      - api_info.json.type == 'multiinfo'
       - api_info.json.resultcount == 1
       - api_info.json.results is defined
 
@@ -19,9 +19,14 @@
   become: no
   connection: local
   get_url: >
-    url='https://aur.archlinux.org{{ api_info.json.results.URLPath }}'
+    url='https://aur.archlinux.org{{ api_info.json.results[0].URLPath }}'
     dest='/tmp/'
   register: aur_tarball
+
+- name: AUR | cleanup old {{ pkg_name }} builds
+  ansible.builtin.file:
+    path: /tmp/{{ pkg_name }}
+    state: absent
 
 - name: AUR | upload and extract package {{ pkg_name }} tarball to host
   become: yes

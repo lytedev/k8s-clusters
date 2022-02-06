@@ -1,0 +1,19 @@
+# arch linux
+- include_tasks: ./create-aur-builder.yml
+  when: ansible_facts.os_family == 'Archlinux'
+
+- include_tasks: ./install-yay-bin.yml
+  when: ansible_facts.os_family == 'Archlinux'
+
+# common
+- include_tasks: ./use-firewalld-with-iptables.yml
+
+- name: open http and https ports in firewalld
+  ansible.builtin.command: >
+    sudo firewall-cmd --add-port=443/tcp --permanent \
+      && sudo firewall-cmd --add-port=80/tcp --permanent \
+      && sudo firewall-cmd --reload
+
+- include_tasks: ./update-all.yml
+
+  # _todo: net.ipv4.ip_forward = 1

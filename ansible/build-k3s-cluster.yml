@@ -1,0 +1,5 @@
+- name: setup k3s on k3s-nodes
+  hosts: k3s-nodes
+  gather_facts: yes
+  roles:
+    - role: k3s-node

@@ -1,0 +1,3 @@
+- name: install k3s
+  ansible.builtin.command: >
+    curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="{{ k3s.version }}" sh -

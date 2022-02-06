@@ -1,4 +1,5 @@
 - name: upgrade all packages
+  when: ansible_facts.os_family == 'Archlinux'
   community.general.pacman:
     # executable: yay
     force: yes
