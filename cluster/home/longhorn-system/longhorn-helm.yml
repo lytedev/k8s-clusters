@@ -1,0 +1,10 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: longhorn
+  namespace: longhorn-system
+spec:
+  chart:
+    repository: https://charts.longhorn.io/longhorn
+    name: podinfo
+    version: 1.2.3

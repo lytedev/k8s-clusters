@@ -7,17 +7,17 @@
   vars:
     aur_helper_pkg: paru-bin
 
-# common
-- include_tasks: ./use-firewalld-with-iptables.yml
-
-# - name: open http and https ports in firewalld
-#   ansible.builtin.command: >
-#     sudo firewall-cmd --add-port=443/tcp --permanent \
-#       && sudo firewall-cmd --add-port=80/tcp --permanent \
-#       && sudo firewall-cmd --reload
-
 - include_tasks: ./upgrade-all-packages.yml
   vars:
     aur_helper_command: paru
 
-  # _todo: net.ipv4.ip_forward = 1
+# TODO: is per-node host-level time sync necessary?
+
+- name: install necessary utilities for longhorn
+  when: ansible_facts.os_family == 'Archlinux'
+  community.general.pacman:
+    executable: 'paru'
+    name: 
+      - nfs-utils
+      - open-iscsi
+    state: present
