@@ -27,6 +27,7 @@ metadata:
     run: my-nginx
   namespace: default
 spec:
+  allocateLoadBalancerNodePorts: false
   type: LoadBalancer
   ports:
   - port: 8000
