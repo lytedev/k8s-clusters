@@ -26,8 +26,6 @@ Before we interact with the cluster, we have some manual work to do.
     - Need to be `ssh`-able from a controller (my workstation)
       - `curl -L files.lyte.dev/key.pub >> ~/.ssh/authorized_keys`
 
-**TODO**: script this? maybe custom ISO+PXEBoot? Talos+Sidero?
-
 ### Automated Provisioning
 
 - Setup Ansible on the controller (from `./ansible`)
@@ -76,4 +74,34 @@ ansible-playbook -i inventory/hosts.yml ./nuke-k3s-cluster
     --from-file=age.agekey=/dev/stdin
   ```
 - Install Flux
-  - `kubectl apply --kustomize=
+  ```
+  flux bootstrap git --url=$SSH_REPO_URL --branch=master \
+    --path=./cluster --private-key-file=$FLUX_PRIVATE_KEY_FILE
+  ```
+
+# To Do & Status
+
+- Flux setup needs to be finalized
+  - Currently having issues getting it to bootstrap since it seems to think my
+    secrets file is supposed to be a k8s resource
+- How am I going to handle highly-available storage?
+- `cert-manager` with CloudFlare?
+- `external-dns` with CloudFlare?
+- I still need to figure out my overall cluster structure
+  - Since my goal is to have full redundancy, I believe I need at least
+    2 control plane nodes, which since I need an odd number means 3 control
+    plane nodes, and at least 2 worker nodes. This means 5 nodes total.
+    I should be able to use some of my rpi4s in the cluster, probably as
+    control plane nodes.
+  - Where/how is storage attached?
+- I need to figure out a migration plan from my current Netlify + Custom DDNS + Docker Compose setup
+  - I should be able to do something like the following:
+    - Setup all applications on the cluster using some dummy domain
+    - Make sure everything works with the dummy domain
+    - Change dummy domain to real domain
+    - Change domain's nameserver to cloudflare
+    - Should be all set!
+- I want to look into Talos/Sidero + PXEBoot, since that could remove a lot of the ansible stuff?
+- `k3s` has a decent amount of magic AFAICT, so I'd like to learn more about it
+  and all its components so I better understand what my system is actually
+  _doing_
