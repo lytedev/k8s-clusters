@@ -5,3 +5,8 @@ k3s-cluster-config.kubeconfig.yaml
 .terraform.tfstate*
 terraform.tfstate*
 .env*
+
+*.tmp
+*.log
+*.key
+.secret*
