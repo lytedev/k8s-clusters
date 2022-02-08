@@ -11,7 +11,7 @@ spec:
     branch: master
   secretRef:
     name: flux-system
-  url: ssh://git@git.lyte.dev:2222/lytedev/home-k8s-cluster
+  url: ssh://git@git.lyte.dev:2222/lytedev/k8s-clusters.git
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
