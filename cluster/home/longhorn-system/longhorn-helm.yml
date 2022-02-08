@@ -5,6 +5,7 @@ metadata:
   namespace: longhorn-system
 spec:
   chart:
-    repository: https://charts.longhorn.io/longhorn
-    name: podinfo
-    version: 1.2.3
+    releaseName: longhorn
+    spec:
+      chart: https://charts.longhorn.io/longhorn
+      version: 1.2.3
