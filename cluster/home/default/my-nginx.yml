@@ -27,7 +27,7 @@ metadata:
     run: my-nginx
   namespace: default
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 80
     protocol: TCP
