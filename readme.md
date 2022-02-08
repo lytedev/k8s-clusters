@@ -28,6 +28,9 @@ Before we interact with the cluster, we have some manual work to do.
     - Have `python3` installed
     - Need to be `ssh`-able from a controller (my workstation)
       - `curl -L files.lyte.dev/key.pub >> ~/.ssh/authorized_keys`
+  - Nodes must support Longhorn: https://longhorn.io/docs/1.2.3/deploy/install/#installation-requirements
+    - Nodes must be running on a host filesystem that supports `file extents`
+    - Provisioning takes care of the rest
 
 ### Automated Provisioning
 
