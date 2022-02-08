@@ -1,7 +1,7 @@
 - name: purge k3s from k3s-nodes
   hosts: all
   become: true
-  gather_facts: yes
+  gather_facts: no
   any_errors_fatal: true
   tasks:
     - name: Kill k3s
@@ -24,3 +24,4 @@
         path: "{{ item.path }}"
         state: absent
       loop: "{{ files_to_delete.files }}"
+

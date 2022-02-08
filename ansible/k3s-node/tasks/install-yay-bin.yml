@@ -1,5 +1,0 @@
-- name: install yay-bin
-  include_tasks: aur.yml
-  vars:
-    makepkg_nonroot_user: aur_builder
-    pkg_name: yay-bin

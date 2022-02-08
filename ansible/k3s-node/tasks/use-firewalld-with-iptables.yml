@@ -1,8 +1,9 @@
-- name: uninstall nftables, install firewalld, configure it to use iptables, and activate it
-  when: ansible_facts.os_family == 'Archlinux'
-  become: true
-  ansible.builtin.command: >
-    pacman -Rs nftables \
-      && pacman -Sy firewalld \
-      && sed -i 's/FirewallBackend=.*/FirewallBackend=iptables/g' /etc/firewalld/firewalld.conf \
-      && systemctl enable --now firewalld
+#- name: uninstall nftables, install firewalld, configure it to use iptables, and activate it
+#  when: ansible_facts.os_family == 'Archlinux'
+#  become: true
+#  ansible.builtin.command: >
+#    pacman -Rs nftables \
+#      && pacman -Sy firewalld \
+#      && sed -i 's/FirewallBackend=.*/FirewallBackend=iptables/g' /etc/firewalld/firewalld.conf \
+#      && systemctl enable firewalld \
+#      && systemctl restart firewalld

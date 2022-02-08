@@ -1,0 +1,9 @@
+# source: https://wiki.archlinux.org/title/Ansible#AUR
+- user: name=aur_builder
+
+- lineinfile:
+    path: /etc/sudoers.d/aur_builder-allow-to-sudo-pacman
+    state: present
+    line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+    validate: /usr/sbin/visudo -cf %s
+    create: yes

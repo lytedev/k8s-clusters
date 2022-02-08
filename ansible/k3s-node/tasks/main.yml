@@ -1,10 +1,9 @@
 - include_tasks: ./prepare-host.yml
 - include_tasks: ./install-k3s.yml
 
-# TODO: setup loadbalancer?
+# TODO: rpi4 loadbalancer? haproxy? metallb?
 
-- include_tasks: ./start-k3s-control-nodes.yml
-  # TODO: probably need some output here?
-
-- include_tasks: ./start-k3s-agents.yml
-  # TODO: probably need the output from control nodes
+# TODO: generate secret
+# TODO: start first control node
+# TODO: start remaining control nodes
+# TODO: start agent nodes
