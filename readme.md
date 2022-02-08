@@ -70,15 +70,17 @@ ansible-playbook -i inventory/hosts.yml ./nuke-k3s-cluster
   - `kubectl create namespace flux-system --dry-run=client -o yaml | kubectl apply -f -`
 - Add the `sops-age` encryption key to the namespace
   ```bash
-  pass home-k8s-cluster | grep age-secret-key | aws '{printf $2}' | \
+  pass home-k8s-cluster | grep age-secret-key | awk '{printf $2}' | \
     kubectl --namespace flux-system create secret generic sops-age \
     --from-file=age.agekey=/dev/stdin
   ```
 - Install Flux
   ```
   flux bootstrap git --url=$SSH_REPO_URL --branch=master \
-    --path=./cluster --private-key-file=$FLUX_PRIVATE_KEY_FILE
+    --path=./cluster/home --private-key-file=$FLUX_PRIVATE_KEY_FILE
   ```
+
+**NOTE**: If you screw something up
 
 # To Do & Status
 
