@@ -61,4 +61,19 @@ ansible-playbook -i inventory/hosts.yml ./nuke-k3s-cluster
 
 ## Setting up Flux
 
--
+- Install the `flux` CLI on a machine that can `kubectl` into the shiny, new cluster
+  - `paru -S flux-bin`
+  - or `curl -s https://fluxcd.io/install.sh | sudo bash`
+  - https://fluxcd.io/docs/installation/
+- Run the pre-flight check (you must have `~/.kube/config` setup!)
+  - `flux check --pre`
+- Create the `flux-system` namespace
+  - `kubectl create namespace flux-system --dry-run=client -o yaml | kubectl apply -f -`
+- Add the `sops-age` encryption key to the namespace
+  ```bash
+  pass home-k8s-cluster | grep age-secret-key | aws '{printf $2}' | \
+    kubectl --namespace flux-system create secret generic sops-age \
+    --from-file=age.agekey=/dev/stdin
+  ```
+- Install Flux
+  - `kubectl apply --kustomize=
