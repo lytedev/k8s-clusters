@@ -94,9 +94,6 @@ If you screw something up here, here are some things you can do:
 
 # To Do & Status
 
-- Flux setup needs to be finalized
-  - Currently having issues getting it to bootstrap since it seems to think my
-    secrets file is supposed to be a k8s resource
 - How am I going to handle highly-available storage?
 - `cert-manager` with CloudFlare?
 - `external-dns` with CloudFlare?
