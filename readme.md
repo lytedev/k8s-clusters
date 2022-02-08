@@ -1,8 +1,9 @@
-# home-k8s-cluster
+# k8s-clusters
 
 This repository contains the configuration, scripts, and other goodies for
-building and managing my home cluster. I share the source with you so you can
-make exactly the same mistakes as I do.
+building and managing my kubernetes clusters (right now, that's just my home
+cluster). I share the source with you so you can make exactly the same mistakes
+as I do.
 
 ## Setup
 
