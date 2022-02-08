@@ -80,7 +80,17 @@ ansible-playbook -i inventory/hosts.yml ./nuke-k3s-cluster
     --path=./cluster/home --private-key-file=$FLUX_PRIVATE_KEY_FILE
   ```
 
-**NOTE**: If you screw something up
+### Troubleshooting
+
+If you screw something up here, here are some things you can do:
+
+- `flux uninstall` will nuke flux from the cluster so you can retry from the
+  beginning of this section
+- If you get something like `sync path configuration ... would overwrite path ... of existing Kustomization`, you can edit the `path: ...` field in the
+  `flux-system/gotk-sync.yaml` file in whatever you're passing as `--path`,
+  commit, and try the bootstrap again
+- You can pretty easily nuke the entire cluster and start from scratch as
+  a last resort?
 
 # To Do & Status
 
