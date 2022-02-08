@@ -1,5 +1,7 @@
 # k8s-clusters
 
+[🖥️ Upstream][upstream] • [🐙 GitHub Mirror][github]
+
 This repository contains the configuration, scripts, and other goodies for
 building and managing my kubernetes clusters (right now, that's just my home
 cluster). I share the source with you so you can make exactly the same mistakes
@@ -115,3 +117,6 @@ If you screw something up here, here are some things you can do:
 - `k3s` has a decent amount of magic AFAICT, so I'd like to learn more about it
   and all its components so I better understand what my system is actually
   _doing_
+
+[upstream]: https://git.lyte.dev/lytedev/k8s-clusters
+[github]: https://github.com/lytedev/k8s-clusters
