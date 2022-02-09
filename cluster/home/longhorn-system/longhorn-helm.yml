@@ -24,3 +24,9 @@ spec:
         name: longhorn
         namespace: longhorn-system
       interval: 20m
+  install: 
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      remediateLastFailure: false

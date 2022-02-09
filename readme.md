@@ -79,10 +79,10 @@ ansible-playbook -i inventory/hosts.yml ./nuke-k3s-cluster
     kubectl --namespace flux-system create secret generic sops-age \
     --from-file=age.agekey=/dev/stdin
   ```
-- Install Flux
+- Install Flux (note the `fish`-isms here, so you may need to translate to `bash`-isms)
   ```
-  flux bootstrap git --url=$SSH_REPO_URL --branch=master \
-    --path=./cluster/home --private-key-file=$FLUX_PRIVATE_KEY_FILE
+  flux bootstrap git --url=(git remote get-url origin-https) --branch=master \
+    --path=./cluster/home --private-key-file=$HOME/.ssh/flux-k8s-clusters
   ```
 
 ### Troubleshooting
