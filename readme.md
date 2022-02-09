@@ -45,17 +45,18 @@ Before we interact with the cluster, we have some manual work to do.
 And the cluster is up! If you want to interact with it from your controller,
 you can do this:
 
+- Copy the cluster information from the `./k3s-cluster-config.kubeconfig.yaml` file into
+  your existing `~/.kube/config` (or just copy it there if it doesn't exist)
+  - You will need to edit the host from `localhost`/`127.0.0.1` to the correct host
+
 ```bash
 ansible -i ansible/inventory/hosts.yml $REMOTE_HOST -m fetch \
   -a "src=/etc/rancher/k3s/k3s.yaml dest=./k3s-cluster-config.kubeconfig.yaml flat=yes"
 # TODO: this did not work for me
 # env KUBECONFIG="~/.kube/config:./k3s-cluster-config.kubeconfig.yaml" \
 # kubectl config view --flatten | sed "s/127.0.0.1/$REMOTE_HOST/" > ~/.kube/new-config
+sed -i 's/127\.0\.0\.1/10.0.0.87' ~/.kube/config
 ```
-
-- Copy the cluster information from the `./k3s-cluster-config.kubeconfig.yaml` file into
-  your existing `~/.kube/config` (or just copy it there if it doesn't exist)
-  - You will need to edit the host from `localhost`/`127.0.0.1` to the correct host
 
 ### Automated Teardown
 
@@ -75,7 +76,7 @@ ansible-playbook -i inventory/hosts.yml ./nuke-k3s-cluster
   - `kubectl create namespace flux-system --dry-run=client -o yaml | kubectl apply -f -`
 - Add the `sops-age` encryption key to the namespace
   ```bash
-  pass home-k8s-cluster | grep age-secret-key | awk '{printf $2}' | \
+  pass k8s-clusters | grep age-secret-key | awk '{printf $2}' | \
     kubectl --namespace flux-system create secret generic sops-age \
     --from-file=age.agekey=/dev/stdin
   ```

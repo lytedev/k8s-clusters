@@ -49,7 +49,7 @@
         src: /var/lib/rancher/k3s/server/node-token
       register: slurped_k3s_node_token
 
-    - name: set token fact
+    - name: set token fact for initial node
       set_fact:
         k3s_node_token: '{{ slurped_k3s_node_token.content | b64decode }}'
 

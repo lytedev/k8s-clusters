@@ -1,5 +1,5 @@
 - name: purge k3s from k3s-nodes
-  hosts: all
+  hosts: k3s-nodes
   become: true
   gather_facts: no
   any_errors_fatal: true
