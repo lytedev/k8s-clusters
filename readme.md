@@ -81,7 +81,7 @@ ansible-playbook -i inventory/hosts.yml ./nuke-k3s-cluster
   ```
 - Install Flux (note the `fish`-isms here, so you may need to translate to `bash`-isms)
   ```
-  flux bootstrap git --url=(git remote get-url origin-https) --branch=master \
+  flux bootstrap git --url=(git remote get-url origin) --branch=master \
     --path=./cluster/home --private-key-file=$HOME/.ssh/flux-k8s-clusters
   ```
 
