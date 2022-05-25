@@ -35,12 +35,12 @@ Before we interact with the cluster, we have some manual work to do.
 ### Automated Provisioning
 
 - Setup Ansible on the controller (from `./ansible`)
-  - `ansible-galaxy install -r requirements.yml --force`
+  - `pushd ansible && ansible-galaxy install -r requirements.yml --force`
 - Verify Ansible can reach hosts (from `./ansible`)
-  - `ansible all -i inventory/hosts.yml --list-hosts`
-  - `ansible all -i inventory/hosts.yml -m ping`
+  - `pushd ansible && ansible all -i inventory/hosts.yml --list-hosts`
+  - `pushd ansible && ansible all -i inventory/hosts.yml -m ping`
 - Use Ansible to build the cluster as configured on all nodes (from `./ansible`)
-  - `ansible-playbook -i inventory/hosts.yml ./build-k3s-cluster`
+  - `pushd ansible && ansible-playbook -i inventory/hosts.yml ./build-k3s-cluster.yml`
 
 And the cluster is up! If you want to interact with it from your controller,
 you can do this:
@@ -61,7 +61,8 @@ sed -i 's/127\.0\.0\.1/10.0.0.87' ~/.kube/config
 ### Automated Teardown
 
 ```bash
-ansible-playbook -i inventory/hosts.yml ./nuke-k3s-cluster
+cd ansible
+ansible-playbook -i inventory/hosts.yml ./nuke-k3s-cluster.yml
 ```
 
 ## Setting up Flux
