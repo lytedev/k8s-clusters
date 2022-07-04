@@ -41,6 +41,7 @@ able to `kubectl get nodes`.
   - `talosctl apply-config --insecure --nodes "$TARGET_NODE_ADDR" --file controlplane.yaml`
   - You will need to wait a bit for Kubernetes to initialize, start up, and
     then join the cluster
+- Add the node to `talosconfig` as needed
 
 ## Storage
 
