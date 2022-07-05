@@ -1,8 +1,0 @@
-- name: upgrade all packages
-  when: ansible_facts.os_family == 'Archlinux'
-  community.general.pacman:
-    executable: '{{ aur_helper_command }}'
-    force: yes
-    state: latest
-    update_cache: yes
-    upgrade: yes

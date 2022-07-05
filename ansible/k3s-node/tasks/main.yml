@@ -1,9 +1,0 @@
-- include_tasks: ./prepare-host.yml
-- include_tasks: ./install-k3s.yml
-
-# TODO: rpi4 loadbalancer? haproxy? metallb?
-
-# TODO: generate secret
-# TODO: start first control node
-# TODO: start remaining control nodes
-# TODO: start agent nodes

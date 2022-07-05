@@ -1,12 +1,5 @@
-k3s-cluster-config.kubeconfig.yaml
-*.agekey
-
-.terraform
-.terraform.tfstate*
-terraform.tfstate*
-.env*
-
 *.tmp
 *.log
 *.key
 .secret*
+tags
