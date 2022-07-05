@@ -1,0 +1,3 @@
+talosconfig
+*.yaml
+!*.encrypted.yaml
